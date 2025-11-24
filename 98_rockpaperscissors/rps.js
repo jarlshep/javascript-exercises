@@ -1,20 +1,9 @@
-console.log("hello")
-
-/*
-create random rock paper or scissors for comp
-prompt user choice, array, number or text, validate input
-compare variables to determine winner
-spit out win lose or draw
-
-Play 5 rounds
-count 
-
-*/
 
 let pcChoiceRPS;
 let userChoiceRPS;
-let humanWins = 0;
-let pcWins = 0;
+// let humanWins = 0;
+// let pcWins = 0;
+const choice ="";
 
 
 function getPCChoice () {
@@ -28,55 +17,72 @@ function getPCChoice () {
         pcChoiceRPS = "scissors";
     }
 
-    console.log(`pcChoiceRPS ${pcChoiceRPS}`);
+    // let pcChoice = document.getElementById(pcChose);
+    pcChose.innerHTML = `Computer choice: ${pcChoiceRPS}`;
 
     return pcChoiceRPS;
 }
 
-function getUserChoice () {
-    let humanInput = prompt("Enter rock, paper or scissors: ");
-    
-    userChoiceRPS = humanInput.toLocaleLowerCase();
+function getUserChoice(choice) {
 
-    console.log(`userChoiceRPS ${userChoiceRPS}`);
+    userChose.innerHTML = `User choice: ${choice}`;
     
-    return userChoiceRPS;
 }
 
-function compareChoices() {
-    
-    if (userChoiceRPS === pcChoiceRPS) {
-        console.log("Draw!");
-    } else if (userChoiceRPS === "paper" && pcChoiceRPS === "rock" || userChoiceRPS === "scissors" && pcChoiceRPS === "paper" || userChoiceRPS === "rock" && pcChoiceRPS === "scissors") {
-        console.log("You won!");
-        humanWins++;
-    } else if (userChoiceRPS === "rock" && pcChoiceRPS === "paper" || userChoiceRPS === "paper" && pcChoiceRPS === "scissors" || userChoiceRPS === "scissors" && pcChoiceRPS === "rock") {
-        console.log("You lost!");
-        pcWins++;
+function compareChoices(choice, pcChoiceRPS) {
+
+    if (choice === pcChoiceRPS) {
+        // console.log("Draw!");
+        document.getElementById("wonOrLost").innerHTML = "Draw!";
+    } else if (choice === "paper" && pcChoiceRPS === "rock" || choice === "scissors" && pcChoiceRPS === "paper" || choice === "rock" && pcChoiceRPS === "scissors") {
+        // console.log("You won!");
+        document.getElementById("wonOrLost").innerHTML = "You won the round!";
+        // humanWins++;
+    } else if (choice === "rock" && pcChoiceRPS === "paper" || choice === "paper" && pcChoiceRPS === "scissors" || choice === "scissors" && pcChoiceRPS === "rock") {
+        // console.log("You lost!");
+        document.getElementById("wonOrLost").innerHTML = "You lost the round!";
+        // pcWins++;
     } 
 }
 
-function playRound() {
+function playRound(choice) {
     // code for single round
     
-    getUserChoice();
+    getUserChoice(choice);
     getPCChoice();
-    compareChoices();
+    compareChoices(choice, pcChoiceRPS);
     
 }
 
-function playGame() {
+/* function playGame() {
     // for loop for 5 rounds
     for (let i = 0; i < 5; i++) {
         playRound();
-        console.log(`Round ${i + 1}`);
+        // console.log(`Round ${i + 1}`);
     }
 
     if (humanWins > pcWins) {
-        console.log("You won the game.");
+        // console.log("You won the game.");
+        document.getElementById("wonOrLost").innerHTML = "You won the game.";
     } else if (humanWins < pcWins) {
-        console.log("PC won the game.");
+        // console.log("PC won the game.");
+        document.getElementById("wonOrLost").innerHTML = "PC won the game.";
     }
-}
+} */
 
-playGame();
+// playGame();
+
+document.getElementById("rock").addEventListener("click", () => {
+    document.getElementById("wonOrLost").innerHTML = "";
+    playRound("rock");
+});
+
+document.getElementById("paper").addEventListener("click", () => {
+    document.getElementById("wonOrLost").innerHTML = "";
+    playRound("paper");
+});
+
+document.getElementById("scissors").addEventListener("click", () => {
+    document.getElementById("wonOrLost").innerHTML = "";
+    playRound("scissors");
+});
